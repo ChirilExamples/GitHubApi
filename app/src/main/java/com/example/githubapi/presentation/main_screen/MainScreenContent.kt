@@ -53,13 +53,14 @@ import com.example.githubapi.data.data_structure.GitHubStructureItem
 import com.example.githubapi.domain.utils.Resource
 import com.example.githubapi.presentation.AppsTopAppBar
 import com.example.githubapi.presentation.HubListViewModel
-import com.ramcosta.composedestinations.annotation.Destination
 import com.skydoves.landscapist.glide.GlideImage
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-// Moved to a separate package for maintainability if/when the app grows,
-// As well as if moving some composable functions would be moved to a separate class
+/*
+Moved to a separate package for maintainability if/when the app grows,
+As well as if moving some composable functions would be moved to a separate class
+*/
 class MainScreenContent {
     @Composable
     fun MainScreen(viewModel: HubListViewModel = viewModel(LocalContext.current as ComponentActivity)) {
@@ -69,7 +70,7 @@ class MainScreenContent {
         Scaffold(modifier = Modifier, topBar = { AppsTopAppBar(text = "Git Repos") }, content = {
             when (state) {
                 is Resource.Success -> {
-                    ScaffodContentMainScreen(
+                    ScaffoldContentMainScreen(
                         state = state as Resource.Success<List<GitHubStructureItem>>,
                         viewModel = viewModel,
                         padding = it
@@ -113,7 +114,7 @@ class MainScreenContent {
     }
 
     @Composable
-    fun ScaffodContentMainScreen(
+    fun ScaffoldContentMainScreen(
         padding: PaddingValues,
         viewModel: HubListViewModel,
         state: Resource.Success<List<GitHubStructureItem>>
@@ -191,7 +192,7 @@ class MainScreenContent {
                 )
                 Column(modifier = Modifier.padding(10.dp)) {
                     Text(
-                        text = "${it.name.replaceFirstChar(Char::titlecase)}",
+                        text = it.name.replaceFirstChar(Char::titlecase),
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(
                             top = 10.dp, end = 10.dp
